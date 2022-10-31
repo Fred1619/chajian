@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<style>
+    canvas {
+        display: block;
+    }
+    
+    .container {
+        width: 1200px;
+        margin: 10px;
+    }
+    
+    ul {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        display: flex;
+        border-bottom: 1px solid #CAC9C9;
+    }
+    
+    ul li {
+        list-style: none;
+        width: 300px;
+        height: 46px;
+    }
+    
+    ul li input {
+        display: none;
+    }
+    
+    input+label {
+        display: block;
+        cursor: pointer;
+        width: 300px;
+        height: 46px;
+        line-height: 46px;
+        text-align: center;
+        font-size: 16px;
+    }
+    
+    input+label+div {
+        width: 100%;
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 48px;
+    }
+    
+    input:checked+label {
+        font-weight: bold;
+        color: #1354a6;
+        position: absolute;
+    }
+    
+    input:checked+label:after {
+        content: "";
+        width: 280px;
+        height: 2px;
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+        background: #1354a6;
+    }
+    
+    input:checked+label+div {
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    
+    #File {
+        display: block;
+    }
+    
+    .button {
+        background-color: #52aefd;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    body {
+        display: block;
+    }
+    
+    #main {
+        margin-top: 10px;
+        margin-left: 2em;
+    }
+    
+    #setting {
+        margin-top: 10px;
+        margin-left: 2em;
+    }
+    
+    #connect {
+        margin-top: 12px;
+        margin-left: 2em;
+    }
+    
+    #btnsave {
+        margin-top: 12px;
+        margin-left: 15px;
+    }
+    
+    #setting>* {
+        margin-bottom: 1em;
+    }
+    
+    label {
+        font-weight: 700;
+        font-size: 15px;
+    }
+    
+    #printContent {
+        margin: 0px 20px;
+        top: 15px;
+        position: relative;
+    }
+    
+    .PDFbox {}
+    
+    .PDFbox input {
+        display: block;
+    }
+    
+    .file {
+        display: flex;
+    }
+    
+    .printbutton {
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    canvas {
+        box-shadow: 0 0 5px gray;
+        display: inline-block;
+        margin-left: 50px;
+    }
+    
+    .p2d {
+        width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .li4 {
+        display: none;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <ul>
+            <li>
+                <input type="radio" name="changeTab" id="t1" checked="true">
+                <label for="t1">Add Printer</label>
+                <div id="main">
+                    <label>1. Click the "Add" button to pair printer</label>
+                    <br>
+                    <label>2. Select printer in the printer list to print</label>
+                    <br>
+                    <label>3. Click the "Print SelfPage" button to print the test page</label>
+                    <div class="buttonbox">
+                        <input type="button" id="connect" class="button" value="Add"></input>
+                        <input type="button" id="selftest" class="button" value="Print SelfPage"></input>
+                        <input type="button" id="print" class="button" value="Print PDF"></input>
+                        <input type="button" id="reload" class="button" value="Do It !!!"></input>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <input type="radio" name="changeTab" id="t2">
+                <label for="t2">Plugin Setting</label>
+                <div id="setting">
+                    <div>
+                        <label for="speed" class="aligned" data-localize="__MSG_speed__">Printer Speed:</label>
+                        <select name="speed" id="speed">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4" selected>4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+							</select>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="density" class="aligned" data-localize="__MSG_density__">Printer
+								Density:</label>
+                        <select name="density" id="density">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8" selected>8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+							</select>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="resolution" class="aligned" data-localize="__MSG_resolution__">Printer
+								Resolution:</label>
+                        <select name="resolution" id="resolution">
+								<option value="1" selected>203dpi x 203dpi</option>
+								<option value="2">300dpi x 300dpi</option>
+							</select>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="rotate" class="aligned" data-localize="__MSG_rotate__">Printer Rotate:</label>
+                        <select name="rotate" id="rotate">
+								<option value="0" selected>0</option>
+								<option value="1">180</option>
+								<option value="2">90</option>
+								<option value="3">270</option>
+							</select>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="imagedarkness" class="aligned" data-localize="__MSG_imagedarkness__">Print
+								Process Darkness:</label>
+                        <select name="imagedarkness" id="imagedarkness">
+								<option value="1" data-localize="__MSG_lighter__">Lighter</option>
+								<option value="2" data-localize="__MSG_nomal__" selected>Nomal</option>
+								<option value="3" data-localize="__MSG_deeper__">Deeper</option>
+							</select>
+                    </div>
+                    <br>
+                    <div>
+                        <input type="button" id="reset" class="button" value="Reset">
+                        <input type="button" id="btnsave" class="button" value="Save">
+                        <input type="button" id="setup" class="button" value="Set up">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <input type="radio" name="changeTab" id="t3">
+                <label for="t3">Send Command</label>
+                <div id="print">
+                    <label>Type command into box and click on "send" button.</label>
+                    <br>
+                    <div>
+                        <textarea id="printContent"></textarea>
+                        <input type="submit" id="sub" value="Send" class="button" />
+                    </div>
+
+                </div>
+            </li>
+            <li class="li4">
+                <input type="radio" name="changeTab" id="t4">
+                <label for="t4">Print PDF</label>
+                <div id="print">
+                    <label>Please select an Img...</label>
+                    <br>
+                    <!-- <div class="PDFbox">
+                        <input type="file" name='file' id="file" multiple />
+                    </div>
+                    <div>
+                        <input type="button" id="btprint" class="printbutton" value="Send" />
+                        <button type="button" id="ptbt">
+                            Print PDF
+                         </button>
+                    </div> -->
+                    <!-- --------------------------------------------------------- -->
+                    <div id="wrapperDiv">
+                        <canvas id="the-canvas" style="border:1px  solid black" width="800" height="1200"></canvas>
+                    </div>
+                    <!-- <div class="p2d">
+                        <canvas id="mycanvas" width="556" height="850"></canvas>
+                        <canvas id="filter" width="556" height="850"></canvas>
+                    </div> -->
+                    <!-- <div><canvas id="canvas" style="border:1px  solid black"></canvas></div> -->
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- <script src="pdf.js"></script> -->
+    <script src="./JSlib/pdf.worker.js"></script>
+    <script src="./JSlib/print.min.js"></script>
+    <script src="./JSlib/p5.min.js"></script>
+    <script src="./JSlib/p5.sound.min.js"></script>
+    <script src="./JSlib/pdf.js"></script>
+    <script src="./common.js"></script>
+    <script src="background.js"></script>
+    <script src="setting.js"></script>
+    <script src="./JSlib/jszip.js"></script>
+    <script src="./JSlib/jszip.min.js"></script>
+
+    <!-- STEP 1 获得PDF_PAGE_URL-->
+    <!-- <script src="./getpdfpagedata.js"></script> -->
+    <!-- STEP 2 获得的pdf转Img并获得base64图片地址-->
+    <!--<script src="./pdf2image.js"></script>-->
+    <!-- STEP 3 将base64图片地址进行处理并获得像素Hex数据-->
+    <!-- <script src="./pdftoimgtohandledata2.js"></script> -->
+    <script src="./pdftoimgtohandledata2_img.js"></script>
+    <!-- STEP 4 将Hex数据进行处理，添加头尾，用于输出-->
+    <script src="handlesenddata.js"></script>
+
+    <script src="./test.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+{
+    "name": "Test",
+    "description": "A Test for Google Chrome Plugins",
+    "version": "0.8",
+    "manifest_version": 2,
+    "icons": {
+        "16": "Avator.png",
+        "48": "Avator.png",
+        "128": "/Avator.png"
+    },
+    "background": {
+        "scripts": ["background.js", "./JSlib/pdf.js", "common.js",  "./JSlib/pdf.worker.js", "./JSlib/print.min.js", "./JSlib/p5.min.js", "./JSlib/pdf.js", "pdftoimgtohandledata2_img.js", "handlesenddata.js"]
+
+},
+    "content_security_policy": "script-src 'self' 'unsafe-eval';object-src 'self'",
+    "permissions": [
+        "contextMenus",
+        "tabs",
+        "notifications",
+        "webRequest",
+        "webRequestBlocking",
+        "storage",
+        "http://*/*",
+        "https://*/*",
+        "system.memory",
+        "system.storage",
+        "history",
+        "printerProvider"
+    ],
+
+    "homepage_url": "https://www.xprintertech.com/",
+    "browser_action": {
+
+        "default_icon": "Avator.png",
+        "default_title": "This is a Test Example"
+    }
+
+
+
+}
